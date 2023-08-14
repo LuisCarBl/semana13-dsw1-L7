@@ -24,4 +24,8 @@ Content-Type: application/json
   "nombre" : "Jaime Hendrix"
 }
 ###
-GET {{server}}/api/integrantes/search/findByBanda?id=http://localhost:8080/api/bandas/1
+GET {{server}}/api/bandas/1
+###
+GET {{server}}/api/integrantes
+###
+GET {{server}}/api/bandas/1/formacion

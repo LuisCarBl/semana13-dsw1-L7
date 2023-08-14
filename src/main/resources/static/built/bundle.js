@@ -41523,6 +41523,8 @@ var _require = __webpack_require__(/*! react */ "./node_modules/react/index.js")
 var _require2 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js"),
   useParams = _require2.useParams;
 var client = __webpack_require__(/*! ../client */ "./src/main/js/client.js");
+var _require3 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js"),
+  Link = _require3.Link;
 var VerBandaPage = function VerBandaPage() {
   var _useParams = useParams(),
     id = _useParams.id;
@@ -41530,12 +41532,23 @@ var VerBandaPage = function VerBandaPage() {
     _useState2 = _slicedToArray(_useState, 2),
     banda = _useState2[0],
     setBanda = _useState2[1];
+  var _useState3 = useState([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    integrantes = _useState4[0],
+    setIntegrantes = _useState4[1];
   useEffect(function () {
+    var url_banda = '/api/bandas/' + id;
     client({
       method: 'GET',
-      path: '/api/bandas/' + id
+      path: url_banda
     }).done(function (response) {
       setBanda(response.entity);
+    });
+    client({
+      method: 'GET',
+      path: url_banda + '/formacion'
+    }).done(function (response) {
+      setIntegrantes(response.entity);
     });
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Ver Banda"), /*#__PURE__*/React.createElement("table", {
@@ -41544,7 +41557,13 @@ var VerBandaPage = function VerBandaPage() {
     border: "1"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
     colSpan: "2"
-  }, "Integrantes")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Musico"), /*#__PURE__*/React.createElement("th", null, "Instrumento"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "musico..."), /*#__PURE__*/React.createElement("td", null, "instrumento...")))));
+  }, "Integrantes")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Musico"), /*#__PURE__*/React.createElement("th", null, "Instrumento"))), /*#__PURE__*/React.createElement("tbody", null, integrantes.map(function (integrante) {
+    return /*#__PURE__*/React.createElement("tr", {
+      key: integrante.ID
+    }, /*#__PURE__*/React.createElement("td", null, integrante.MUSICO), /*#__PURE__*/React.createElement("td", null, integrante.INSTRUMENTO));
+  }))), /*#__PURE__*/React.createElement(Link, {
+    to: "/"
+  }, "Volver"));
 };
 module.exports = VerBandaPage;
 

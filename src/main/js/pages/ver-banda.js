@@ -2,19 +2,28 @@ const React = require('react');
 const {useState, useEffect} = require('react');
 const {useParams} = require('react-router-dom');
 const client = require('../client');
+const {Link} = require('react-router-dom');
 
 const VerBandaPage = ()=>{
 
     let {id} = useParams();
     const [banda, setBanda] = useState({});
+    const [integrantes, setIntegrantes] = useState([]);
 
     useEffect(()=>{
+
+        const url_banda = '/api/bandas/'+id
+
         client({
             method: 'GET',
-            path: '/api/bandas/'+id
-        }).done((response)=>{
-            setBanda(response.entity);
-        })
+            path: url_banda
+        }).done((response)=>{setBanda(response.entity);})
+
+        client({
+            method: 'GET',
+            path: url_banda + '/formacion'
+        }).done((response)=>{setIntegrantes(response.entity);})
+
     }, []);
 
     return (
@@ -43,12 +52,17 @@ const VerBandaPage = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>musico...</td>
-                        <td>instrumento...</td>
-                    </tr>
+                    {integrantes.map(integrante => {
+                        return (
+                            <tr key={integrante.ID}>
+                                <td>{integrante.MUSICO}</td>
+                                <td>{integrante.INSTRUMENTO}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
+            <Link to="/">Volver</Link>
         </>
     );
 }
