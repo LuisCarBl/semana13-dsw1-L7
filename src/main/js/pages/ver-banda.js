@@ -62,7 +62,7 @@ const VerBandaPage = ()=>{
                     })}
                 </tbody>
             </table>
-            <Link to="/">Volver</Link>
+            <Link to={`/ver-banda/${id}/nuevo-integrante`}>Nuevo Integrante</Link> | <Link to="/">Volver</Link>
         </>
     );
 }
