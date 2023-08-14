@@ -19,8 +19,12 @@ class PageHome extends React.Component {
 		return (
 			<>
                 <h1>Aplicación Demo</h1>
+
 				<Titulo entidad="Instrumento" />
 				<InstrumentoList instrumentos={this.state.instrumentos} />
+				<br />
+				<Link to="/nuevo-instrumento">Nuevo Instrumento</Link>
+
 				<Titulo entidad="Músico" />
 				<MusicoList musicos={this.state.musicos} />
 				<br />
