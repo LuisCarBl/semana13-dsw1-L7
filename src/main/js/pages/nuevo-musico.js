@@ -12,7 +12,7 @@ function PageNuevoMusico() {
         event.preventDefault();
         client({
             method: 'POST',
-            path: '/api/musicos',
+            path: '/api/directores',
             entity: { nombre: nombre },
             headers: { 'Content-Type': 'application/json' }
         }).done( () => window.location = "/");
@@ -20,11 +20,11 @@ function PageNuevoMusico() {
 
     return (
         <>
-            <h1>Nuevo Músico</h1>
+            <h1>Nuevo Director</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" onChange={(e)=>setNombre(e.target.value)} />
-                <input type="submit" value="Nuevo Músico" />
+                <input type="submit" value="Nuevo Director" />
             </form>
             <hr />
             <Link to="/">Volver</Link>

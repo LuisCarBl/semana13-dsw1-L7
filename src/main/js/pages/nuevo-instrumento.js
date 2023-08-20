@@ -7,34 +7,30 @@ const {useState} = require('react');
 function PageNuevoInstrumento() {
 
     const [nombre, setNombre] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [descripcion, setDescripcion] = useState("");
+    const [genero, setGenero] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         client({
             method: 'POST',
-            path: '/api/instrumentos',
-            entity: { nombre: nombre, categoria: categoria, descripcion: descripcion },
+            path: '/api/peliculas',
+            entity: { nombre: nombre, genero: genero},
             headers: { 'Content-Type': 'application/json' }
         }).done( () => window.location = "/");
     };
 
     return (
         <>
-            <h1>Nuevo Instrumento</h1>
+            <h1>Nueva Pelicula</h1>
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" onChange={(e)=>setNombre(e.target.value)} /><br />
                 
-                <label htmlFor="categoria">Categoría</label>
-                <input type="text" id="categoria" name="categoria" onChange={(e)=>setCategoria(e.target.value)} /><br />
+                <label htmlFor="genero">Genero</label>
+                <input type="text" id="genero" name="genero" onChange={(e)=>setGenero(e.target.value)} /><br />
 
-                <label htmlFor="nombre">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" onChange={(e)=>setDescripcion(e.target.value)} /><br />
-                
-                <input type="submit" value="Nuevo Instrumento" />
+                <input type="submit" value="Nueva Pelicula" />
             </form>
             <hr />
             <Link to="/">Volver</Link>

@@ -7,10 +7,10 @@ const client = require('../client');
 const NuevoIntegrantePage = () => {
 
     let { id } = useParams();
-    const [musicos, setMusicos] = useState([])
-    const [instrumentos, setInstrumentos] = useState([])
-    const [idMusico, setIdMusico] = useState('')
-    const [idInstrumento, setIdInstrumento] = useState('')
+    const [directores, setDirectores] = useState([])
+    const [peliculas, setPeliculas] = useState([])
+    const [idDirector, setIdDirector] = useState('')
+    const [idPelicula, setIdPelicula] = useState('')
 
     const handleSubmit = (evento)=>{
         evento.preventDefault();
@@ -18,9 +18,9 @@ const NuevoIntegrantePage = () => {
             method: 'POST',
             path: '/api/integrantes',
             entity: {
-                banda: 'http://localhost:8080/api/bandas/'+id,
-                musico: 'http://localhost:8080/api/musicos/'+idMusico,
-                instrumento: 'http://localhost:8080/api/instrumentos/'+idInstrumento},
+                studio: 'http://localhost:8080/api/studios/'+id,
+                director: 'http://localhost:8080/api/directores/'+idDirector,
+                pelicula: 'http://localhost:8080/api/peliculas/'+idPelicula},
             headers: {'Content-Type': 'application/json'}
         }).done(()=>{
            window.location = '/';
@@ -30,23 +30,23 @@ const NuevoIntegrantePage = () => {
     useEffect(() => {
         client({
             method: 'GET',
-            path: '/api/musicos'
+            path: '/api/directores'
         }).done(response=>{
-            let musicos2 = [];
-            response.entity._embedded.musicos.map(musico => {
-                musicos2.push({value: musico._links.self.href.split('/').slice(-1), label: musico.nombre})
+            let directores2 = [];
+            response.entity._embedded.directores.map(director => {
+                directores2.push({value: director._links.self.href.split('/').slice(-1), label: director.nombre})
             })
-            setMusicos(musicos2)
+            setDirectores(directores2)
         })
         client({
             method: 'GET',
-            path: '/api/instrumentos'
+            path: '/api/peliculas'
         }).done(response=>{
-            let instrumentos2 = [];
-            response.entity._embedded.instrumentos.map(instrumento => {
-                instrumentos2.push({value: instrumento._links.self.href.split('/').slice(-1), label: instrumento.nombre})
+            let peliculas2 = [];
+            response.entity._embedded.peliculas.map(pelicula => {
+                peliculas2.push({value: pelicula._links.self.href.split('/').slice(-1), label: pelicula.nombre})
             })
-            setInstrumentos(instrumentos2)
+            setPeliculas(peliculas2)
         })
 
     },[])
@@ -56,20 +56,20 @@ const NuevoIntegrantePage = () => {
             <h1>Nuevo Integrante</h1>
             <form onSubmit={handleSubmit}>
 
-                <label htmlFor='musico'>Musico</label>
-                <select name="musico" id="musico" onChange={(e)=>{setIdMusico(e.target.value)}}>
-                    {musicos.map(musico => {	
+                <label htmlFor='director'>Director</label>
+                <select name="director" id="director" onChange={(e)=>{setIdDirector(e.target.value)}}>
+                    {directores.map(director => {	
                         return (
-                            <option key={musico.value} value={musico.value}>{musico.label}</option>
+                            <option key={director.value} value={director.value}>{director.label}</option>
                         )
                     })}
                 </select>
                 
-                <label>Instrumento</label>
-                <select name="instrumento" id="instrumento" onChange={(e)=>{setIdInstrumento(e.target.value)}}>
-                    {instrumentos.map(instrumento => {	
+                <label>Pelicula</label>
+                <select name="pelicula" id="pelicula" onChange={(e)=>{setIdPelicula(e.target.value)}}>
+                    {peliculas.map(pelicula => {	
                         return (
-                            <option key={instrumento.value} value={instrumento.value}>{instrumento.label}</option>
+                            <option key={pelicula.value} value={pelicula.value}>{pelicula.label}</option>
                         )
                     })}
                 </select>

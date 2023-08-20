@@ -7,34 +7,34 @@ const {Link} = require('react-router-dom');
 const VerBandaPage = ()=>{
 
     let {id} = useParams();
-    const [banda, setBanda] = useState({});
+    const [studio, setStudio] = useState({});
     const [integrantes, setIntegrantes] = useState([]);
 
     useEffect(()=>{
 
-        const url_banda = '/api/bandas/'+id
+        const url_studio = '/api/studios/'+id
 
         client({
             method: 'GET',
-            path: url_banda
-        }).done((response)=>{setBanda(response.entity);})
+            path: url_studio
+        }).done((response)=>{setStudio(response.entity);})
 
         client({
             method: 'GET',
-            path: url_banda + '/formacion'
+            path: url_studio + '/formacion'
         }).done((response)=>{setIntegrantes(response.entity);})
 
     }, []);
 
     return (
         <>
-            <h1>Ver Banda</h1>
+            <h1>Ver Studio</h1>
 
             <table border="1">
                 <tbody>
                     <tr>
                         <th>Nombre</th>
-                        <td>{banda.nombre}</td>
+                        <td>{studio.nombre}</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,16 +47,16 @@ const VerBandaPage = ()=>{
                         <th colSpan="2">Integrantes</th>  
                     </tr>
                     <tr>
-                        <th>Musico</th>
-                        <th>Instrumento</th>
+                        <th>Director</th>
+                        <th>Pelicula</th>
                     </tr>
                 </thead>
                 <tbody>
                     {integrantes.map(integrante => {
                         return (
                             <tr key={integrante.ID}>
-                                <td>{integrante.MUSICO}</td>
-                                <td>{integrante.INSTRUMENTO}</td>
+                                <td>{integrante.DIRECTOR}</td>
+                                <td>{integrante.PELICULA}</td>
                             </tr>
                         );
                     })}
