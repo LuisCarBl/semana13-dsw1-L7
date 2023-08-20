@@ -18,6 +18,10 @@ GET {{studios}}
 GET {{integrantes}}
 ###
 
+###
+GET {{peliculas}}
+###
+
 POST {{directores}}
 Content-Type: application/json
 
@@ -26,9 +30,7 @@ Content-Type: application/json
   "categoria" : "Instrumento de viento",
   "descripcion" : "tubo con orificios que al taparlos hacen sonar diferentes notas"
 }
-###
-GET {{peliculas}}
-###
+
 
 ###
 PATCH {{peliculas}}/1
