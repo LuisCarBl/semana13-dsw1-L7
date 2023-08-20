@@ -7,57 +7,58 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-	private final InstrumentoRepository repositoryI;
-	private final MusicoRepository repositoryM;
-	private final BandaRepository repositoryB;
+	private final PeliculaRepository repositoryP;
+	private final DirectorRepository repositoryD;
+	private final StudioRepository repositoryS;
 	private final IntegranteRepository repositoryN;
 
 	@Autowired
 	public DatabaseLoader(
-		InstrumentoRepository repositoryI,
-		MusicoRepository repositoryM,
-		BandaRepository repositoryB,
+		PeliculaRepository repositoryP,
+		DirectorRepository repositoryD,
+		StudioRepository repositoryS,
 		IntegranteRepository repositoryN
 		) {
-		this.repositoryI = repositoryI;
-		this.repositoryM = repositoryM;
-		this.repositoryB = repositoryB;
+		this.repositoryP = repositoryP;
+		this.repositoryD = repositoryD;
+		this.repositoryS = repositoryS;
 		this.repositoryN = repositoryN;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
 
-		Instrumento iVoz = new Instrumento("Voz", "Viento", "Voz humana");
-		Instrumento iGuitarrElectrica = new Instrumento("Guitarra Eléctrica", "Eléctrica", "de madera, SIN caja de resonancia, 6 cuerdas templadas metálicas, pastillas y amplificador");
-		Instrumento iBajo = new Instrumento("Bajo", "Eléctrico", "Ritmos");
-		this.repositoryI.save(new Instrumento("Guitarra Acústica", "Cuerda", "de madera, con caja de resonancia, 6 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Ukelele","Cuerda","de madera, con caja de resonancia pequeña, 4 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Melódica","Viento","teclado pequeño de 2 octavas, sonorizado por soplido"));
-		this.repositoryI.save(new Instrumento("Batería", "Percusión", "Percisiones"));
-		this.repositoryI.save(iVoz);
-		this.repositoryI.save(iGuitarrElectrica);
-		this.repositoryI.save(iBajo);
+		Pelicula pBlueBeetle = new Pelicula("Blue Beetle", "Acción");
+		Pelicula pEscapeBajoFuego = new Pelicula("Escape Bajo Fuego", "Acción");
+		Pelicula pHospitalSangriento = new Pelicula("Hospital Sangriento", "Terror");
+		this.repositoryP.save(new Pelicula("Transformers: El despertar de las Bestias", "Ciencia Ficci\u00F3n"));
+		this.repositoryP.save(new Pelicula("Super Mario Bros. La película","Aventura"));
+		this.repositoryP.save(new Pelicula("Megalodon 2","Acción"));
+		this.repositoryP.save(new Pelicula("Elementos", "Animación"));
+		this.repositoryP.save(pBlueBeetle);
+		this.repositoryP.save(pEscapeBajoFuego);
+		this.repositoryP.save(pHospitalSangriento);
 
-		Musico mFreddie = new Musico("Freddie");
-		Musico mBrian = new Musico("Brian");
-		Musico mRogerWaters = new Musico("Roger Waters");
-		this.repositoryM.save(mFreddie);
-		this.repositoryM.save(mBrian);
-		this.repositoryM.save(mRogerWaters);
-		this.repositoryM.save(new Musico("Roger Taylor"));
+		Director dAngelManuel = new Director("Ángel Manuel Soto");
+		Director dRicRoman = new Director("Ric Roman Waugh");
+		Director dDiegoHallivis = new Director("Diego Hallivis");
+		this.repositoryD.save(dAngelManuel);
+		this.repositoryD.save(dRicRoman);
+		this.repositoryD.save(dDiegoHallivis);
+		this.repositoryD.save(new Director("Roger Taylor"));
 
-		Banda bQueen = new Banda("Queen");
-		Banda bPinkFloyd = new Banda("Pink Floyd");
-		this.repositoryB.save(bQueen);
-		this.repositoryB.save(bPinkFloyd);
+		Studio sCineColorColombia = new Studio("Cine Color Colombia");
+		Studio sCinemaARD = new Studio("Cinema ARD");
+		Studio sDcStudios = new Studio("DC Studios");
+		this.repositoryS.save(sCineColorColombia);
+		this.repositoryS.save(sDcStudios);
 
-		Integrante intFreddie = new Integrante(bQueen, mFreddie, iVoz);
-		this.repositoryN.save(intFreddie);
-		Integrante intBrian = new Integrante(bQueen, mBrian, iGuitarrElectrica);
-		this.repositoryN.save(intBrian);
-		Integrante intRogerWaters = new Integrante(bPinkFloyd, mRogerWaters, iBajo);
-		this.repositoryN.save(intRogerWaters);
+		Integrante intAngelManuel = new Integrante(sDcStudios, dAngelManuel, pBlueBeetle);
+		this.repositoryN.save(intAngelManuel);
+		Integrante intRicRoman = new Integrante(sCinemaARD, dRicRoman, pEscapeBajoFuego);
+		this.repositoryN.save(intRicRoman);
+		Integrante intDiegoHallivis = new Integrante(sCineColorColombia, dDiegoHallivis, pHospitalSangriento);
+		this.repositoryN.save(intDiegoHallivis);
 
 
 	}

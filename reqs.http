@@ -1,10 +1,24 @@
-@server = https://ubiquitous-dollop-vgqvx7jqrh5-8080.app.github.dev
-@instrumentos = {{server}}/api/instrumentos
-@musicos = {{server}}/api/musicos
+@server = https://animated-happiness-xjqqvqj5pvwfvj4q-8080.app.github.dev
+@directores = {{server}}/api/directores
+@peliculas = {{server}}/api/peliculas
+@studios = {{server}}/api/studios
+@integrantes = {{server}}/api/integrantes
+###   
+
+GET {{directores}}
 ###
-GET {{instrumentos}}/1
+
+###   
+
+GET {{studios}}
 ###
-POST {{instrumentos}}
+
+###   
+
+GET {{integrantes}}
+###
+
+POST {{directores}}
 Content-Type: application/json
 
 {
@@ -13,18 +27,18 @@ Content-Type: application/json
   "descripcion" : "tubo con orificios que al taparlos hacen sonar diferentes notas"
 }
 ###
-GET {{musicos}}
+GET {{peliculas}}
 ###
-GET {{musicos}}/1
+
 ###
-PATCH {{musicos}}/1
+PATCH {{peliculas}}/1
 Content-Type: application/json
 
 {
   "nombre" : "Jaime Hendrix"
 }
 ###
-GET {{server}}/api/bandas/1
+GET {{server}}/api/studios/1
 ###
 GET {{server}}/api/integrantes
 ###

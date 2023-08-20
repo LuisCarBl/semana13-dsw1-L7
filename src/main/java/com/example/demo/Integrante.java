@@ -12,23 +12,23 @@ public class Integrante {
 	private @Id @GeneratedValue Long id;
 
 	@ManyToOne()
-	@JoinColumn(name = "id_banda")
-	private Banda banda;
+	@JoinColumn(name = "id_studio")
+	private Studio studio;
 
 	@ManyToOne()
-	@JoinColumn(name = "id_musico")
-	private Musico musico;
+	@JoinColumn(name = "id_director")
+	private Director director;
 
 	@ManyToOne()
-	@JoinColumn(name = "id_instrumento")
-	private Instrumento instrumento;
+	@JoinColumn(name = "id_pelicula")
+	private Pelicula pelicula;
 
 	public Integrante() {}
 
-	public Integrante(Banda banda, Musico musico, Instrumento instrumento) {
-		this.banda = banda;
-		this.musico = musico;
-		this.instrumento = instrumento;
+	public Integrante(Studio studio, Director director, Pelicula pelicula) {
+		this.studio = studio;
+		this.director = director;
+		this.pelicula = pelicula;
 	}
 
 
@@ -40,28 +40,28 @@ public class Integrante {
 		this.id = id;
 	}
 
-    public Banda getBanda() {
-        return banda;
+    public Studio getStudio() {
+        return studio;
     }
 
-    public void setBanda(Banda banda) {
-        this.banda = banda;
+    public void setStudio(Studio studio) {
+        this.studio = studio;
     }
 
-    public Musico getMusico() {
-        return musico;
+    public Director gDirector() {
+        return director;
     }
 
-    public void setMusico(Musico musico) {
-        this.musico = musico;
+    public void setDirector(Director director) {
+        this.director = director;
     }
 
-    public Instrumento getInstrumento() {
-        return instrumento;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
-    public void setInstrumento(Instrumento instrumento) {
-        this.instrumento = instrumento;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
 	

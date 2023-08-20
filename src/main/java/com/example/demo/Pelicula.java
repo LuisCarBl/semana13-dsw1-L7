@@ -7,37 +7,41 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Musico {
+public class Pelicula {
 
 	private @Id @GeneratedValue Long id;
 	private String nombre;
+	private String genero;
 
-	private Musico() {}
+	private Pelicula() {}
 
-	public Musico(String nombre) {
+	public Pelicula(String nombre, String genero) {
 		this.nombre = nombre;
+		this.genero = genero;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Musico musico = (Musico) o;
-		return Objects.equals(id, musico.id) &&
-			Objects.equals(nombre, musico.nombre);
+		Pelicula pelicula = (Pelicula) o;
+		return Objects.equals(id, pelicula.id) &&
+			Objects.equals(nombre, pelicula.nombre) &&
+			Objects.equals(genero, pelicula.genero);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, nombre);
+		return Objects.hash(id, nombre, genero);
 	}
 
 	@Override
 	public String toString() {
-		return "Instrumento{" +
+		return "Pelicula{" +
 			"id=" + id +
 			", nombre='" + nombre + '\'' +
+			", genero='" + genero + '\'' +
 			'}';
 	}
 
@@ -57,5 +61,13 @@ public class Musico {
 		this.nombre = nombre;
 	}
 
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	
 
 }
